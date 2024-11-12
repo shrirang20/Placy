@@ -19,7 +19,7 @@ from pydantic import Field
 # import gdown
 
 class GeminiLLM(LLM):
-    model_name: str = Field(..., description="gemini-pro")
+    model_name: str = Field(..., description="gemini-1.5-flash")
     model: Any = Field(None, description="The GenerativeModel instance")
     
     def __init__(self, model_name: str):
@@ -66,7 +66,7 @@ with st.spinner("Loading"):
         if not st.session_state.pdf_processed:
             genai.configure(api_key=os.getenv('GEMINI_API_KEY'))
             login(token="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")
-            llm=genai.GenerativeModel(model_name='gemini-pro')
+            llm=genai.GenerativeModel(model_name='gemini-1.5-flash')
 
             embedding_function = HuggingFaceEmbeddings(model_name='sentence-transformers/all-MiniLM-L6-v2')
             faiss_vector_store = FAISS.from_texts([raw_text], embedding_function)
@@ -198,7 +198,7 @@ prePrompt = None
 # if st.session_state.prePrompt_selected and prePrompt is not None:
     
     # query_text = prePrompt.strip() 
-    # gemini_llm = GeminiLLM(model_name='gemini-pro')
+    # gemini_llm = GeminiLLM(model_name='gemini-1.5-flash')
     # if st.session_state.faiss_vector_index is not None:
     #     answer = st.session_state.faiss_vector_index.query(query_text, llm=gemini_llm).strip()
     #     typing_speed = 0.02
@@ -221,7 +221,7 @@ if prompt:
     st.session_state.messages.append({"role": "user", "content": prompt})
 
     query_text = prompt.strip()
-    gemini_llm = GeminiLLM(model_name='gemini-pro')
+    gemini_llm = GeminiLLM(model_name='gemini-1.5-flash')
     if st.session_state.faiss_vector_index is not None:
         
         answer = st.session_state.faiss_vector_index.query(query_text, llm=gemini_llm).strip()
