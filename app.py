@@ -15,7 +15,7 @@ import os
 import time
 from langchain.llms.base import LLM
 from typing import Any, List, Optional, Dict
-from pydantic import Field
+from pydantic import Field, BaseModel
 # import gdown
 
 class GeminiLLM(LLM, BaseModel):
